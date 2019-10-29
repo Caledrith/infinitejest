@@ -30,7 +30,7 @@ export default {
     //     this.jokes = response.data.list[0]
     //   }
     // })
-    this.jokes = ["this is a joke lol", "another one haha", "fgajkrbeniugbaiubgiuhawiufnbiuer long joke bndsakjhgbrhijabghibehwabghbarehgb"]
+    this.jokes = ["this is a joke lol", "another one haha", "fgajkrbeniugbaiubgiuhawiufnbiuer long joke bndsakjhgbrhijabghibehwabghbarehgb","also a joke"]
   },
   methods: {
 
