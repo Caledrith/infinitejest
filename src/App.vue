@@ -9,14 +9,16 @@
 </template>
 
 <script>
-import headerBar from './components/headerBar'
+import headerBar from './components/headerBar';
 import MainDisplay from './components/MainDisplay';
+import SideNav from './components/SideNav';
 
 export default {
   name: 'App',
   components: {
     MainDisplay,
-    headerBar
+    headerBar,
+    SideNav
   },
   data: () => ({
     //
