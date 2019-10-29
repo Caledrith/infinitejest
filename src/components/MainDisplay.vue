@@ -10,7 +10,15 @@
           :key="i"
         >
           <v-list-item-content>
+            <v-card
+              outlined
+            >
               <v-list-item-title v-text="joke"></v-list-item-title>
+              <v-card-actions>
+                <v-btn text>Like</v-btn>
+                <v-btn text>Dislike</v-btn>
+              </v-card-actions>
+            </v-card>
           </v-list-item-content>
         </v-list-item>
       </v-list>
