@@ -24,7 +24,6 @@
           <v-list-item
             v-for="item in items"
             :key="item.title"
-            @click=""
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
