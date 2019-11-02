@@ -14,6 +14,7 @@
               outlined
             >
               <v-list-item-title v-text="joke"></v-list-item-title>
+              <router-link :to="{name: 'joke', params: {id: 1}}">Go to joke</router-link>
               <v-card-actions>
                 <v-btn text>Like</v-btn>
                 <v-btn text>Dislike</v-btn>
