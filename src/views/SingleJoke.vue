@@ -1,10 +1,10 @@
 <template>
   <div class="joke">
     <v-row>
-      <v-col cols="4">
+      <v-col cols="2">
         <SideNav/>
       </v-col>
-      <v-col cols="5" style="text-align:center">
+      <v-col cols="8" style="text-align:center">
         <v-row>
           <v-col>
             <p class="display-1" v-if="loaded">{{joke.joke}}</p>
@@ -20,16 +20,18 @@
         </v-row>
         <v-row>
           <v-col>
-          <v-rating v-model="rating" :value="joke.rating"></v-rating>
+          <v-rating v-model="rating" :value="rating" readonly half-increments></v-rating>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-btn  text icon><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
-            <v-btn text icon><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+            <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{upvotes}}
+            <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{downvotes}}
+            <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn>
           </v-col>
         </v-row>
-        <a v-bind:href="joke.sourceURL">{{joke.sourceURL}}</a>
+        <p v-if="joke.source">{{joke.source}}</p>
+        <a v-if="joke.sourceURL" v-bind:href="joke.sourceURL">{{joke.sourceURL}}</a>
       </v-col>
     </v-row>
   </div>
@@ -50,12 +52,79 @@ export default {
   },
     data: () => ({
     joke: null,
+    userRating: null,
     id: 0,
-    seen: false
+    seen: false,
+    jokeRating: 0,
+    upvotes: 0,
+    downvotes: 0
   }),
   created () {
     this.id = this.$route.params.id;
+    if (typeof this.id === 'string') {
+      this.id = parseInt(this.id);
+    }
+    // will have to get this from the current user
+    this.userId = 1
   }, 
+  methods: {
+    upvote: function () {
+      var previousVote = false
+      var change = 0
+      if(!this.userRating.upvote){
+        if (this.userRating.downvote) {
+          previousVote = true
+          change = 1
+        }
+        axios
+          .patch('/jokes/upvoteJoke/'+this.id,{
+            remove: previousVote,
+            ratingId : this.userRating.id
+          })
+          .then(response => (
+            console.log(response.data.message),
+            this.upvotes += response.data.message,
+            this.downvotes -= change,
+            this.jokeRating = this.upvotes/(this.downvotes + this.upvotes) * 100),
+            this.userRating.upvote = 1,
+            this.userRating.downvote = 0
+            )
+      }
+      
+    },
+    downvote: function () {
+      var previousVote = false
+      var change = 0
+      if (!this.userRating.downvote){
+        if (this.userRating.upvote) {
+          previousVote = true
+          change = 1
+        }
+        axios
+          .patch('/jokes/downvoteJoke/'+this.id,{
+            remove: previousVote,
+            ratingId : this.userRating.id
+          })
+          .then(response => (
+            this.downvotes += response.data.message,
+            this.upvotes -= change,
+            console.log(response.data.message),
+            this.jokeRating = this.upvotes/(this.downvotes + this.upvotes) * 100),
+            this.userRating.downvote = 1,
+            this.userRating.upvote = 0
+          )
+      }
+      
+    },
+    edit: function () {
+      // should it redirect to another page?
+    },
+    user: function () {
+      // need to get the current user id
+      // so we can change this to true only for the joker.userId
+      return false
+    }
+  },
   computed: {
     hasPunchline: function() {
       if (this.joke !== null && this.joke.hasPunchline !== '') {
@@ -73,8 +142,32 @@ export default {
   },
   mounted ()  {
     axios
-      .get('http://localhost:8000/jokes/getJokeById/'+this.id)
-      .then(response => (this.joke = response.data.message))
+      .get('/jokes/getJokeById/'+this.id)
+      .then(response => (this.joke = response.data.message,
+       this.jokeRating = response.data.message.rating,
+       this.upvotes = response.data.message.upvotes,
+       this.downvotes = response.data.message.downvotes))
+    axios.get('/ratings/getRatingByUserAndJoke',{
+      params:{
+        userId : this.userId,
+        jokeId : this.id
+      }
+    }).then((response) => {
+      console.log(response.data.message)
+      if(typeof response.data.message === 'undefined'){
+        console.log('create')
+          axios.post('/ratings/createRating', {
+          'userId' : this.userId,
+          'jokeId' : this.id,
+          'upvote' : 0,
+          'downvote' : 0,
+        }).then(response => (this.userRating = response.data.message))
+      } else {
+        this.userRating = response.data.message
+      }
+        
+    }).catch((error) => {
+    })
   }
 }
 </script>
