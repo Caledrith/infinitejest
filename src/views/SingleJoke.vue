@@ -1,11 +1,37 @@
 <template>
   <div class="joke">
-    <p v-if="loaded">{{joke.joke}}</p>
-    <p v-if="seen && hasPunchline">{{joke.hiddenPunchline}}</p>
-    <p v-if="!seen && hasPunchline"><button class="btn btn-lg btn-primary" v-on:click="seen = !seen">Answer</button></p>
-    {{ joke }}
-    <p></p>
-    <SideNav/>
+    <v-row>
+      <v-col cols="4">
+        <SideNav/>
+      </v-col>
+      <v-col cols="5" style="text-align:center">
+        <v-row>
+          <v-col>
+            <p class="display-1" v-if="loaded">{{joke.joke}}</p>
+            <p class="headline" v-if="seen && hasPunchline">{{joke.hiddenPunchline}}</p>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+          <div v-if="!seen && hasPunchline">
+            <v-btn v-on:click="seen = !seen">Answer!</v-btn>
+          </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+          <v-rating v-model="rating" :value="joke.rating"></v-rating>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn  text icon><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
+            <v-btn text icon><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+          </v-col>
+        </v-row>
+        <a v-bind:href="joke.sourceURL">{{joke.sourceURL}}</a>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
