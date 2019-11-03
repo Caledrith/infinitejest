@@ -35,10 +35,12 @@
 
 <script>
 import axios from 'axios'
+import {dataStore} from '../dataStore.js'
 
 export default {
   name: 'joke',
   data: () => ({
+    store: dataStore,
     categories: ["Knock knock"],
     jokeTitle: "",
     jokePunchline: "",
@@ -51,7 +53,7 @@ export default {
   }),
   methods: {
     submit() {
-      joke = {userId: userId, jokeCategoryId: jokeCategoryId, joke: jokeTitle, hiddenPunchline: jokePunchline, uploaded: currentTime, upvotes: 0, downvotes: 0, source: jokeSource, sourceURL: jokeSourceURL, flags: flags, rating: rating}
+      joke = {userId: this.store.userId, jokeCategoryId: jokeCategoryId, joke: jokeTitle, hiddenPunchline: jokePunchline, uploaded: currentTime, upvotes: 0, downvotes: 0, source: jokeSource, sourceURL: jokeSourceURL, flags: flags, rating: rating}
       axios
       .put('http://localhost:8000/joke/createJoke/', joke)
       .then(response => (this.$router.push('/')))
