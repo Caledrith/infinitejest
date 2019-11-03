@@ -5,17 +5,15 @@
         <span class="font-weight-light">JEST</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
+      <Login/>
     </v-app-bar>
 </template>
 <script>
+import Login from '@/components/Login';
 export default {
+  components: {
+    Login
+  },
   data: () => ({
   }),
 };

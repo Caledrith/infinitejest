@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import SingleJoke from '../views/SingleJoke.vue'
-import Login from '../views/Login.vue'
 import SubmitJoke from '../views/SubmitJoke.vue'
 
 Vue.use(VueRouter)
@@ -17,11 +16,6 @@ const routes = [
     path: '/joke/:id',
     name: 'joke',
     component: SingleJoke
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
   },
   {
     path: '/submitJoke',
