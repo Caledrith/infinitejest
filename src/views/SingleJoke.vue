@@ -5,13 +5,11 @@
     <p v-if="!seen && hasPunchline"><button class="btn btn-lg btn-primary" v-on:click="seen = !seen">Answer</button></p>
     {{ joke }}
     <p></p>
-    <SideNav/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SideNav from '@/components/SideNav.vue'
 import router from '../router'
 import axios from 'axios'
 
