@@ -1,5 +1,5 @@
 <template>
-    <v-card height="350px">
+    <v-card class="scroll-y"  style="height: 650px">
       <v-navigation-drawer
         absolute
         permanent

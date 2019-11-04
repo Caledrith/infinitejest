@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <SideNav/>
-    <MainDisplay/>
+    <SideNav class="navbar"/>
+    <MainDisplay class="second"/>
   </div>
 </template>
 
@@ -20,3 +20,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.navbar{
+  width: 250px;
+    float: left;
+    height: 100%;
+}
+.second{
+    width: 200px;
+    float: left;
+    height: 300px;
+    margin-left:100px;
+}
+</style>

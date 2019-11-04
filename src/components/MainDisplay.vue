@@ -12,11 +12,12 @@
           <v-list-item-content>
             <v-card
               outlined
+              
             >
-              <v-list-item-title v-text="joke"></v-list-item-title>
+              <v-list-item-title class="innerText" v-text="joke"></v-list-item-title>
               <v-card-actions>
-                <v-btn text>Like</v-btn>
-                <v-btn text>Dislike</v-btn>
+                <v-btn text outlined class="button">Like</v-btn>
+                <v-btn text outlined class="button">Dislike</v-btn>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
@@ -47,3 +48,18 @@ export default {
 
 
 </script>
+
+<style scoped>
+  .innerText{
+    padding-top:5px;
+    padding-left:10px;
+    padding-right:10px;
+    text-align:left;
+  }
+  .button{
+    margin-top:10px;
+    font-size: .7em;
+    min-height:0px;
+    min-width: 0px;
+  }
+</style>
