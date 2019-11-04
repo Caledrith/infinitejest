@@ -1,17 +1,14 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="290">
+    <v-dialog v-model="dialog" max-width="400">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Login</v-btn>
       </template>
       <v-card>
         <v-card-title class="headline">Login</v-card-title>
           <v-form v-model="valid">
-          <v-container>
-              <v-col
-                cols="12"
-                md="4"
-              >
+          <v-container wrap>
+              <v-col>
                 <v-text-field
                   v-model="username"
                   label="Username"
@@ -19,10 +16,7 @@
                 ></v-text-field>
               </v-col>
 
-              <v-col
-                cols="12"
-                md="4"
-              >
+              <v-col>
                 <v-text-field
                   v-model="password"
                   label="Password"
@@ -41,7 +35,6 @@
   </v-row>
 </template>
 <script>
-
 export default {
 }
 </script>

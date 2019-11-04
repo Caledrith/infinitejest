@@ -1,7 +1,15 @@
 <template>
   <div class="home">
-    <SideNav/>
-    <MainDisplay/>
+    <v-container fluid class="fill-height">
+      <v-row>
+        <v-col>
+          <SideNav/>
+        </v-col>
+        <v-col cols="9">
+          <MainDisplay/>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -10,7 +18,6 @@
 import MainDisplay from '@/components/MainDisplay.vue'
 import headerBar from '@/components/headerBar.vue'
 import SideNav from '@/components/SideNav.vue'
-
 export default {
   name: 'home',
   components: {
@@ -20,17 +27,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.navbar{
-  width: 250px;
-    float: left;
-    height: 100%;
-}
-.second{
-    width: 200px;
-    float: left;
-    height: 300px;
-    margin-left:100px;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
+      <v-toolbar-title class="headline text-uppercase" @click="$router.push('/')">
         <span>Infinite</span>
         <span class="font-weight-light">JEST</span>
       </v-toolbar-title>
@@ -13,16 +13,17 @@
       <div v-else>
         <v-btn to="/submitJoke">Submit a Joke</v-btn>
       </div>
-      <Login/>
     </v-app-bar>
 </template>
 <script>
 import Login from '@/components/Login';
+import {dataStore} from '../dataStore.js'
 export default {
   components: {
     Login
   },
   data: () => ({
+    store: dataStore 
   }),
 };
 </script>
