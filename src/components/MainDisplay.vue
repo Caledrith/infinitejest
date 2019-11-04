@@ -14,7 +14,12 @@
               outlined
               
             >
+<<<<<<< HEAD
               <v-list-item-title class="innerText" v-text="joke"></v-list-item-title>
+=======
+              <v-list-item-title v-text="joke"></v-list-item-title>
+              <router-link :to="{name: 'joke', params: {id: 1}}">Go to joke</router-link>
+>>>>>>> 539e0e642e96aa567fcdc2fff440b2ee79e58e2f
               <v-card-actions>
                 <v-btn text outlined class="button">Like</v-btn>
                 <v-btn text outlined class="button">Dislike</v-btn>

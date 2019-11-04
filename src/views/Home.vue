@@ -1,7 +1,15 @@
 <template>
   <div class="home">
-    <SideNav class="navbar"/>
-    <MainDisplay class="second"/>
+    <v-container fluid class="fill-height">
+      <v-row>
+        <v-col>
+          <SideNav/>
+        </v-col>
+        <v-col cols="9">
+          <MainDisplay/>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
