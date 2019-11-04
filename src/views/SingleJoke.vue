@@ -15,10 +15,7 @@ import axios from 'axios'
 
 export default {
   name: 'joke',
-  components: {
-    SideNav
-  },
-    data: () => ({
+  data: () => ({
     joke: null,
     id: 0,
     seen: false

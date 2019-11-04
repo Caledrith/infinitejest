@@ -13,7 +13,7 @@
             <v-card
               outlined
             >
-              <v-list-item-title v-text="joke"></v-list-item-title>
+              <v-list-item-title v-text="joke.joke"></v-list-item-title>
               <router-link :to="{name: 'joke', params: {id: 1}}">Go to joke</router-link>
               <v-card-actions>
                 <v-btn text>Like</v-btn>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {testJokes} from '../testJokes.js'
 export default {
   data: () => ({
     jokes: [],
@@ -39,7 +40,7 @@ export default {
     //     this.jokes = response.data.list[0]
     //   }
     // })
-    this.jokes = ["this is a joke lol", "another one haha", "fgajkrbeniugbaiubgiuhawiufnbiuer long joke bndsakjhgbrhijabghibehwabghbarehgb","also a joke"]
+    this.jokes = testJokes
   },
   methods: {
   }
