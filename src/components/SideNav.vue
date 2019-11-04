@@ -1,54 +1,43 @@
 <template>
-    <v-container>
-        <v-card height="350px">
-        <v-navigation-drawer
-            absolute
-            permanent
-            left
-        >
-            <div v-slot:prepend>
-            <v-list-item two-line>
-                <v-list-item-avatar>
-                <img src="https://randomuser.me/api/portraits/women/81.jpg">
-                </v-list-item-avatar>
-    
+    <v-container class="fill-height" mr-0 pr-0>
+        <v-navigation-drawer absolute permanent>
+            <v-list-item>
                 <v-list-item-content>
-                <v-list-item-title>Jane Smith</v-list-item-title>
-                <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+                <v-list-item-title class="title">
+                    Categories
+                </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
-            </div>
-    
+
             <v-divider></v-divider>
-    
-            <v-list dense>
-            <v-list-item
-                v-for="item in items"
-                :key="item.title"
-                @click=""
+
+            <v-list
+                dense
+                nav
             >
-                <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-    
+                <v-list-item
+                v-for="category in categories"
+                :key="category"
+                link
+                >
                 <v-list-item-content>
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    <v-list-item-title>{{ category }}</v-list-item-title>
                 </v-list-item-content>
-            </v-list-item>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
-        </v-card>
     </v-container>
 </template>
 
 <script>
 export default {
   data: () => ({
-    items: [
-        { title: 'Home', icon: 'mdi-home-city' },
-        { title: 'My Account', icon: 'mdi-account' },
-        { title: 'Users', icon: 'mdi-account-group-outline' },
-      ]
-  })
+    categories: ["Knock Knock", "Long Jokes", "Yo mama jokes"]
+  }),
+  mounted ()  {
+    axios
+      .get('http://localhost:8000/categories/getAllCategories/')
+      .then(response => (this.categories = response.data.message))
+  }
 };
 </script>
