@@ -47,15 +47,24 @@ export default {
     this.displayJokes = testJokes
 
   },
+  watch: {
+    category: {
+      immediate: true,
+      handler(val, oldVal)
+      {
+        this.filter(val)
+      }
+    }
+  },
   methods: {
-    filter(categoryId)
+    filter(category)
     {
       console.log("got into filter")
       var intermediateJokes = [];
       var i;
       for(i = 0; i < this.jokes.length; i++)
       {
-        if(this.jokes[i].jokeCategoryId == categoryId)
+        if(this.jokes[i].jokeCategoryId == category)
         {
           intermediateJokes.push(this.jokes[i])
         }
