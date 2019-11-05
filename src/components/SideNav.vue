@@ -17,7 +17,8 @@
             >
                 <v-list-item
                 v-for="category in categories"
-                :key="category"
+                :key="category.id"
+                @click="chooseCategory(category.id)"
                 link
                 >
                 <v-list-item-content>
@@ -38,6 +39,11 @@ export default {
     axios
       .get('http://localhost:8000/categories/getAllCategories/')
       .then(response => (this.categories = response.data.message))
+  },
+  methods: {
+    chooseCategory(id) {
+      this.$emit('choosecategory', id)
+    }
   }
 };
 </script>

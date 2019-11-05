@@ -3,10 +3,10 @@
     <v-container fluid class="fill-height">
       <v-row>
         <v-col>
-          <SideNav/>
+          <SideNav @choosecategory="sendCategory($event)"/>
         </v-col>
         <v-col cols="9">
-          <MainDisplay/>
+          <MainDisplay v-bind:category="category"/>
         </v-col>
       </v-row>
     </v-container>
@@ -24,6 +24,14 @@ export default {
     MainDisplay,
     headerBar,
     SideNav
+  },
+  computed: {
+    category: 0
+  },
+  methods: {
+    sendCategory(event) {
+      this.category = event
+    }
   }
 }
 </script>

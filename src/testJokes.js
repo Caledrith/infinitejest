@@ -1,5 +1,6 @@
 export var testJokes = [
     {   
+        id: "1",
         userId: "1", 
         jokeCategoryId: "1", 
         joke: "This is my joke title", 
@@ -13,6 +14,7 @@ export var testJokes = [
         rating: null
     },
     {   
+        id: "2",
         userId: "2", 
         jokeCategoryId: "2", 
         joke: "This is my joke title 2", 
@@ -26,6 +28,7 @@ export var testJokes = [
         rating: null
     },
     {   
+        id: "3",
         userId: "3", 
         jokeCategoryId: "3", 
         joke: "This is my joke title 3", 
@@ -39,6 +42,7 @@ export var testJokes = [
         rating: null
     },
     {   
+        id: "4",
         userId: "4", 
         jokeCategoryId: "1", 
         joke: "This is my joke title 4", 
