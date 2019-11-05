@@ -25,9 +25,9 @@ export default {
     headerBar,
     SideNav
   },
-  computed: {
+  data: () => ({
     category: 0
-  },
+  }),
   methods: {
     sendCategory(event) {
       this.category = event
