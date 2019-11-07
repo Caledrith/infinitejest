@@ -10,8 +10,8 @@
               outlined
             >
               <v-list-item-title @click="toJoke(joke.id)" class="ma-2 title" v-text="joke.joke"></v-list-item-title>
-              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
-              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
+              <v-list-item-subtitle @click="toggleShow(joke)" class="ml-5 subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
+              <v-list-item-subtitle @click="toggleShow(joke)" class="ml-5 subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-btn text>Like</v-btn>
                 <v-btn text>Dislike</v-btn>
