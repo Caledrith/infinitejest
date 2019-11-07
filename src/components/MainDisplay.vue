@@ -9,12 +9,14 @@
             <v-card
               outlined
             >
-              <v-list-item-title @click="toJoke(joke.id)" class="ma-2 title" v-text="joke.joke"></v-list-item-title>
+              <v-list-item-title @click="toJoke(joke.id)" style="cursor: pointer" class="ma-2 title" v-text="joke.joke"></v-list-item-title>
               <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
               <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-btn text>Like ({{joke.upvotes}})</v-btn>
                 <v-btn text>Dislike ({{joke.downvotes}})</v-btn>
+                <v-spacer/>
+                <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
@@ -31,6 +33,7 @@ export default {
   data: () => ({
     jokes: [],
     displayJokes: [],
+    isHovering: false,
   }),
   created() {
     // this.$http.get('localhost:8080/getjokes').then(function(response){
@@ -59,6 +62,10 @@ export default {
     toJoke(jokeId)
     {
       this.$router.push('/joke/' + jokeId)
+    },
+    toJokeSource(joke)
+    {
+      window.location.href = joke.sourceURL
     },
     filter(category)
     {
