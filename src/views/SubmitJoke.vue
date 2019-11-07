@@ -51,7 +51,11 @@ export default {
   }),
   methods: {
     submit() {
-      joke = {userId: userId, jokeCategoryId: jokeCategoryId, joke: jokeTitle, hiddenPunchline: jokePunchline, uploaded: getTime(), upvotes: 0, downvotes: 0, source: jokeSource, sourceURL: jokeSourceURL, flags: flags, rating: rating}
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+      joke = {userId: userId, jokeCategoryId: jokeCategoryId, joke: jokeTitle, hiddenPunchline: jokePunchline, uploaded: dateTime, upvotes: 0, downvotes: 0, source: jokeSource, sourceURL: jokeSourceURL, flags: flags, rating: rating}
       axios
       .put('http://localhost:8000/joke/createJoke/', joke)
       .then(response => (this.$router.push('/')))
