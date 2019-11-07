@@ -16,8 +16,8 @@
             >
               <v-list-item-title v-text="joke.joke"></v-list-item-title>
               <v-card-actions>
-                <v-btn text>Like</v-btn>
-                <v-btn text>Dislike</v-btn>
+                <v-btn text>Like ({{joke.upvotes}})</v-btn>
+                <v-btn text>Dislike ({{joke.downvotes}})</v-btn>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
@@ -66,6 +66,7 @@ export default {
       if(category == 0)
       {
         this.displayJokes = this.jokes
+        return
       }
       var intermediateJokes = [];
       var i;

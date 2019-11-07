@@ -34,7 +34,7 @@
 import {testCategories} from '../categories.js'
 export default {
   data: () => ({
-    categories = [],
+    categories: [],
   }),
   mounted ()  {
     axios
