@@ -31,16 +31,18 @@
 </template>
 
 <script>
+import {testCategories} from '../categories.js'
 export default {
   data: () => ({
-    categories: [{id: 0, categoryName: "All"}, {id: 1, categoryName: "One-Liners"}, {id: 2, categoryName: "Puns & Dad Jokes"}, 
-    {id: 3, categoryName: "Laffy Taffy Riddles"}, {id: 4, categoryName: "Tricky Riddles"}, 
-    {id: 5, categoryName: "Shaggy Dog Stories"}]
+    categories = [],
   }),
   mounted ()  {
     axios
       .get('http://localhost:8000/categories/getAllCategories/')
       .then(response => (this.categories = response.data.message))
+  },
+  created() {
+    this.categories = testCategories
   },
   methods: {
     chooseCategory(id) {
