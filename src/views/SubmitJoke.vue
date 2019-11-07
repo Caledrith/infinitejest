@@ -16,6 +16,8 @@
           ></v-text-field>
           <v-select
             :items="categories"
+            item-text="categoryName"
+            item-value="id"
             label="Category"
           ></v-select>
           <v-text-field
@@ -35,11 +37,12 @@
 
 <script>
 import axios from 'axios'
+import {testCategories} from '../categories.js'
 
 export default {
   name: 'joke',
   data: () => ({
-    categories: ["Knock knock"],
+    categories: [],
     jokeTitle: "",
     jokePunchline: "",
     jokeCategory: "",
@@ -49,6 +52,11 @@ export default {
     jokeSourceURL: "",
     flags: null
   }),
+  created()
+  {
+    this.categories = testCategories
+    this.categories.shift()
+  },
   methods: {
     submit() {
       var today = new Date();

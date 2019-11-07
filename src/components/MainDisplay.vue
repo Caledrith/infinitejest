@@ -13,8 +13,8 @@
               <v-list-item-subtitle @click="toggleShow(joke)" class="ml-5 subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
               <v-list-item-subtitle @click="toggleShow(joke)" class="ml-5 subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
-                <v-btn text>Like</v-btn>
-                <v-btn text>Dislike</v-btn>
+                <v-btn text>Like ({{joke.upvotes}})</v-btn>
+                <v-btn text>Dislike ({{joke.downvotes}})</v-btn>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
@@ -65,6 +65,7 @@ export default {
       if(category == 0)
       {
         this.displayJokes = this.jokes
+        return
       }
       var intermediateJokes = [];
       var i;
