@@ -1,9 +1,5 @@
 <template>
   <v-container>
-    <v-layout
-      text-center
-      wrap
-    >
       <v-list>
         <v-list-item
           v-for="(joke, i) in displayJokes"
@@ -13,17 +9,17 @@
             <v-card
               outlined
             >
-              <v-list-item-title v-text="joke.joke"></v-list-item-title>
+              <v-list-item-title class="ma-2 title" v-text="joke.joke"></v-list-item-title>
+              <v-list-item-subtitle v-if="" v-text=""></v-list-item-subtitle>
               <router-link :to="{name: 'joke', params: {id: joke.id}}">Go to joke</router-link>
               <v-card-actions>
-                <v-btn text v-on:click="filter(1)">Like</v-btn>
+                <v-btn text>Like</v-btn>
                 <v-btn text>Dislike</v-btn>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-layout>
   </v-container>
 </template>
 
