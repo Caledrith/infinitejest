@@ -57,5 +57,35 @@ export var testJokes = [
         sourceURL: "jokeSourceURL.com", 
         flags: null, 
         rating: null
+    },
+    {   
+        id: "5",
+        userId: "5", 
+        jokeCategoryId: "1", 
+        joke: "This is my joke title 5", 
+        hiddenPunchline: "This is the punchline 5", 
+        showPunch: false,
+        uploaded: "2018-8-3 11:12:40", 
+        upvotes: 1, 
+        downvotes: 1, 
+        source: "Source", 
+        sourceURL: "jokeSourceURL.com", 
+        flags: null, 
+        rating: null
+    },
+    {   
+        id: "6",
+        userId: "6", 
+        jokeCategoryId: "1", 
+        joke: "This is my joke title 4", 
+        hiddenPunchline: "This is the punchline 4", 
+        showPunch: false,
+        uploaded: "2018-8-3 11:12:40", 
+        upvotes: 1, 
+        downvotes: 1, 
+        source: "Source", 
+        sourceURL: "jokeSourceURL.com", 
+        flags: null, 
+        rating: null
     }
 ];
