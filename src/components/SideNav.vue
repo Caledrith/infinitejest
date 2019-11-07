@@ -1,6 +1,6 @@
 <template>
-    <v-container class="fill-height" mr-0 pr-0>
-        <v-navigation-drawer absolute permanent>
+    <v-container class="fill-height ma-0 pa-0">
+        <v-navigation-drawer permanent>
             <v-list-item>
                 <v-list-item-content>
                 <v-list-item-title class="title">

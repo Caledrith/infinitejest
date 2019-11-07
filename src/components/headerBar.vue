@@ -1,6 +1,6 @@
 <template>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase" @click="$router.push('/')">
+      <v-toolbar-title class="headline text-uppercase" @click="$router.push('/')" style="cursor: pointer">
         <span>Infinite</span>
         <span class="font-weight-light">JEST</span>
       </v-toolbar-title>
