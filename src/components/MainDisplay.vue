@@ -8,10 +8,10 @@
           <v-list-item-content>
             <v-card
               outlined
+              @click="toJoke(joke.id)"
             >
               <v-list-item-title class="ma-2 title" v-text="joke.joke"></v-list-item-title>
               <v-list-item-subtitle v-if="" v-text=""></v-list-item-subtitle>
-              <router-link :to="{name: 'joke', params: {id: joke.id}}">Go to joke</router-link>
               <v-card-actions>
                 <v-btn text>Like</v-btn>
                 <v-btn text>Dislike</v-btn>
@@ -53,9 +53,16 @@ export default {
     }
   },
   methods: {
+    toJoke(jokeId)
+    {
+      this.$router.push('/joke/' + jokeId)
+    },
     filter(category)
     {
-      console.log("got into filter")
+      if(category == 0)
+      {
+        this.displayJokes = this.jokes
+      }
       var intermediateJokes = [];
       var i;
       for(i = 0; i < this.jokes.length; i++)
