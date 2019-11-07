@@ -5,7 +5,7 @@
         <v-col>
           <SideNav @choosecategory="sendCategory($event)"/>
         </v-col>
-        <v-col cols="9">
+        <v-col cols="10" class="mt-0 pt-0">
           <MainDisplay v-bind:category="category"/>
         </v-col>
       </v-row>

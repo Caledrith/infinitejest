@@ -1,20 +1,17 @@
 <template>
   <v-container>
-    <v-layout
-      text-center
-      wrap
-    >
       <v-list>
         <v-list-item
-          v-for="(joke, i) in displayJokes"
-          :key="i"
+          v-for="(joke) in displayJokes"
+          :key="joke.id"
         >
           <v-list-item-content>
             <v-card
               outlined
-              @click="toJoke(joke.id)"
             >
-              <v-list-item-title v-text="joke.joke"></v-list-item-title>
+              <v-list-item-title @click="toJoke(joke.id)" class="ma-2 title" v-text="joke.joke"></v-list-item-title>
+              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
+              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-btn text>Like ({{joke.upvotes}})</v-btn>
                 <v-btn text>Dislike ({{joke.downvotes}})</v-btn>
@@ -23,7 +20,6 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-layout>
   </v-container>
 </template>
 
@@ -57,6 +53,9 @@ export default {
     }
   },
   methods: {
+    toggleShow(joke) {
+      joke.showPunch = !joke.showPunch
+    },
     toJoke(jokeId)
     {
       this.$router.push('/joke/' + jokeId)
