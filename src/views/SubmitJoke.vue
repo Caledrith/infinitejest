@@ -1,7 +1,7 @@
 <template>
   <div class="Submit Joke">
     <h1>This is a Joke submission page</h1>
-    <v-form>
+    <v-form id="form">
       <v-container>
         <v-col>
           <v-textarea
@@ -38,19 +38,22 @@
 <script>
 import axios from 'axios'
 import {testCategories} from '../categories.js'
+import {dataStore} from '../dataStore.js'
 
 export default {
   name: 'joke',
+  // userId should be replaced by dataStore.user.id when logging is implemented
   data: () => ({
     categories: [],
     jokeTitle: "",
     jokePunchline: "",
     jokeCategory: "",
     jokeCategoryId: 0,
-    rating: null,
+    rating: 0.5,
     jokeSource: "",
     jokeSourceURL: "",
-    flags: null
+    flags: null,
+    userId: dataStore.testUser.id
   }),
   created()
   {
@@ -63,10 +66,23 @@ export default {
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
       var dateTime = date+' '+time;
-      joke = {userId: userId, jokeCategoryId: jokeCategoryId, joke: jokeTitle, hiddenPunchline: jokePunchline, uploaded: dateTime, upvotes: 0, downvotes: 0, source: jokeSource, sourceURL: jokeSourceURL, flags: flags, rating: rating}
+      let joke = {
+        userId: this.userId,
+        jokeCategoryId: this.jokeCategoryId,
+        joke: this.jokeTitle,
+        hiddenPunchline: this.jokePunchline,
+        uploaded: dateTime,
+        upvotes: 0,
+        downvotes: 0,
+        source: this.jokeSource,
+        sourceURL: this.jokeSourceURL,
+        flags: this.flags,
+        rating: this.rating
+      }
       axios
-      .put('http://localhost:8000/joke/createJoke/', joke)
-      .then(response => (this.$router.push('/')))
+        .post('/jokes/createJoke/', joke)
+        .then(response => (this.$router.push('/')))
+
     },
     getTime() {
       var today = new Date();
@@ -78,7 +94,7 @@ export default {
   },
   mounted ()  {
     axios
-      .get('http://localhost:8000/categories/getAllCategories/')
+      .get('/categories/getAllCategories/')
       .then(response => (this.categories = response.data.message))
   }
 }

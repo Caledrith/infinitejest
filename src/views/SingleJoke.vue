@@ -1,21 +1,29 @@
 <template>
   <div class="joke">
     <v-row>
-      <v-col cols="2">
-        <SideNav/>
-      </v-col>
-      <v-col cols="8" style="text-align:center">
+
+      <v-col style="text-align:center">
         <v-row>
           <v-col>
             <p class="display-1" v-if="loaded">{{joke.joke}}</p>
-            <p class="headline" v-if="seen && hasPunchline">{{joke.hiddenPunchline}}</p>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-          <div v-if="!seen && hasPunchline">
-            <v-btn v-on:click="seen = !seen">Answer!</v-btn>
-          </div>
+            <br>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <p class="headline" v-on:click="seen = !seen" v-if="seen && hasPunchline">{{joke.hiddenPunchline}}</p>
+            <div v-if="!seen && hasPunchline">
+              <v-btn v-on:click="seen = !seen">Answer!</v-btn>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <br>
           </v-col>
         </v-row>
         <v-row>
@@ -27,7 +35,7 @@
           <v-col>
             <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{upvotes}}
             <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{downvotes}}
-            <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn>
+            <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
           </v-col>
         </v-row>
         <p v-if="joke.source">{{joke.source}}</p>
