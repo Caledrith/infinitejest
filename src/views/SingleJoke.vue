@@ -39,18 +39,12 @@
 
 <script>
 // @ is an alias to /src
-import headerBar from '@/components/headerBar.vue'
-import SideNav from '@/components/SideNav.vue'
 import router from '../router'
 import axios from 'axios'
 
 export default {
   name: 'joke',
-  components: {
-    headerBar,
-    SideNav
-  },
-    data: () => ({
+  data: () => ({
     joke: null,
     userRating: null,
     id: 0,

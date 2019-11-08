@@ -1,51 +1,53 @@
 <template>
-    <v-card height="350px">
-      <v-navigation-drawer
-        absolute
-        permanent
-        left
-      >
-        <template v-slot:prepend>
-          <v-list-item two-line>
-            <v-list-item-avatar>
-              <img src="https://randomuser.me/api/portraits/women/81.jpg">
-            </v-list-item-avatar>
-  
-            <v-list-item-content>
-              <v-list-item-title>Jane Smith</v-list-item-title>
-              <v-list-item-subtitle>Logged In</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-  
-        <v-divider></v-divider>
-  
-        <v-list dense>
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-  
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    </v-card>
+    <v-container class="fill-height ma-0 pa-0">
+        <v-navigation-drawer permanent>
+            <v-list-item>
+                <v-list-item-content>
+                <v-list-item-title class="title">
+                    Categories
+                </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list
+                dense
+                nav
+            >
+                <v-list-item
+                v-for="category in categories"
+                :key="category.id"
+                @click="chooseCategory(category.id)"
+                link
+                >
+                <v-list-item-content>
+                    <v-list-item-title>{{ category.categoryName }}</v-list-item-title>
+                </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
+    </v-container>
 </template>
 
 <script>
+import {testCategories} from '../categories.js'
 export default {
   data: () => ({
-    items: [
-        { title: 'Home', icon: 'mdi-home-city' },
-        { title: 'My Account', icon: 'mdi-account' },
-        { title: 'Users', icon: 'mdi-account-group-outline' },
-      ]
-  })
+    categories: [],
+  }),
+  mounted ()  {
+    axios
+      .get('http://localhost:8000/categories/getAllCategories/')
+      .then(response => (this.categories = response.data.message))
+  },
+  created() {
+    this.categories = testCategories
+  },
+  methods: {
+    chooseCategory(id) {
+      this.$emit('choosecategory', id)
+    }
+  }
 };
 </script>
