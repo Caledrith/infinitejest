@@ -27,6 +27,7 @@
 
 <script>
 import {testJokes} from '../testJokes.js'
+import axios from 'axios'
 export default {
   props:
     ['category'],
@@ -35,17 +36,6 @@ export default {
     displayJokes: [],
     isHovering: false,
   }),
-  created() {
-    // this.$http.get('localhost:8080/getjokes').then(function(response){
-    //   if(response.status == "200"){
-    //     console.log(response);
-    //     this.jokes = response.data.list[0]
-    //   }
-    // })
-    this.jokes = testJokes
-    this.displayJokes = testJokes
-
-  },
   watch: {
     category: {
       immediate: true,
@@ -86,6 +76,14 @@ export default {
       this.displayJokes = intermediateJokes;
     }
 
+  },
+  mounted() {
+    axios
+      .get('/jokes/getJokes')
+      .then(response => (this.jokes = response.data.message,
+      this.displayJokes = this.jokes
+      )).catch((error) => {
+    })
   }
 };
 </script>

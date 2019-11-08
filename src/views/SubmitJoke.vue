@@ -53,7 +53,8 @@ export default {
     jokeSource: "",
     jokeSourceURL: "",
     flags: null,
-    userId: dataStore.testUser.id
+    userId: dataStore.testUser.id,
+    username: dataStore.testUser.name
   }),
   created()
   {
@@ -62,22 +63,20 @@ export default {
   },
   methods: {
     submit() {
-      var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date+' '+time;
       let joke = {
         userId: this.userId,
         jokeCategoryId: this.jokeCategoryId,
         joke: this.jokeTitle,
         hiddenPunchline: this.jokePunchline,
-        uploaded: dateTime,
+        uploaded: this.getTime(),
         upvotes: 0,
         downvotes: 0,
         source: this.jokeSource,
         sourceURL: this.jokeSourceURL,
         flags: this.flags,
-        rating: this.rating
+        rating: this.rating,
+        showPunch: false,
+        username: this.username
       }
       axios
         .post('/jokes/createJoke/', joke)
