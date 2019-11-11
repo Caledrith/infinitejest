@@ -16,6 +16,7 @@ export default {
     headerBar
   },
   data: () => ({
+    //
   }),
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <v-container class="fill-height" mr-0 pr-0>
-        <v-navigation-drawer absolute permanent>
+    <v-container class="fill-height ma-0 pa-0">
+        <v-navigation-drawer permanent>
             <v-list-item>
                 <v-list-item-content>
                 <v-list-item-title class="title">
@@ -17,11 +17,12 @@
             >
                 <v-list-item
                 v-for="category in categories"
-                :key="category"
+                :key="category.id"
+                @click="chooseCategory(category.id)"
                 link
                 >
                 <v-list-item-content>
-                    <v-list-item-title>{{ category }}</v-list-item-title>
+                    <v-list-item-title>{{ category.categoryName }}</v-list-item-title>
                 </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -30,14 +31,23 @@
 </template>
 
 <script>
+import {testCategories} from '../categories.js'
 export default {
   data: () => ({
-    categories: ["Knock Knock", "Long Jokes", "Yo mama jokes"]
+    categories: [],
   }),
   mounted ()  {
     axios
       .get('http://localhost:8000/categories/getAllCategories/')
       .then(response => (this.categories = response.data.message))
+  },
+  created() {
+    this.categories = testCategories
+  },
+  methods: {
+    chooseCategory(id) {
+      this.$emit('choosecategory', id)
+    }
   }
 };
 </script>
