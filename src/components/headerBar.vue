@@ -6,8 +6,11 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn @click="store.loggedIn = true; store.user = store.testUser">Test Login</v-btn>
-      <v-btn @click="store.loggedIn = false; store.user = {}">Test Logut</v-btn>
-      <div v-if="!store.loggedIn">
+      <v-btn @click="store.loggedIn = false; store.user = {}">Test Logout</v-btn>
+      <div>
+        <Signup/>
+      </div>
+      <div>
         <Login/>
       </div>
       <div v-else>
@@ -17,11 +20,13 @@
 </template>
 <script>
 import Login from '@/components/Login';
+import Signup from '@/components/Signup';
 import {dataStore} from '../dataStore.js'
 
 export default {
   components: {
-    Login
+    Login,
+    Signup
   },
   data: () => ({
     store: dataStore 

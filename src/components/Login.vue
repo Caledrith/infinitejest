@@ -8,34 +8,46 @@
         <v-card-title class="headline">Login</v-card-title>
           <v-form v-model="valid">
           <v-container wrap>
-              <v-col>
-                <v-text-field
-                  v-model="username"
-                  label="Username"
-                  required
-                ></v-text-field>
-              </v-col>
-
-              <v-col>
-                <v-text-field
-                  v-model="password"
-                  label="Password"
-                  required
-                ></v-text-field>
-              </v-col>
+            <v-col>
+              <v-text-field
+                v-model="user.userName"
+                label="Username"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="user.password"
+                label="Password"
+                required
+              ></v-text-field>
+            </v-col>
           </v-container>
         </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="dialog = false">Signup</v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">Login</v-btn>
+          <v-btn color="green darken-1" text @click="login">Login</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-row>
 </template>
 <script>
+import axios from 'axios'
 
 export default {
+  // @click signup function -> send data to the database
+  data: () => ({
+    user: {
+      userName: "",
+      password: ""
+    },
+  }),
+  methods: {
+    login(user)
+    {
+      axios.post('/users/authenticateUser', user)
+    }
+  },
 }
 </script>
