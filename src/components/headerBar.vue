@@ -5,12 +5,12 @@
         <span class="font-weight-light">JEST</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="store.loggedIn = true; store.user = store.testUser">Test Login</v-btn>
-      <v-btn @click="store.loggedIn = false; store.user = {}">Test Logout</v-btn>
-      <div>
+      <!-- <v-btn @click="store.loggedIn = true; store.user = store.testUser">Test Login</v-btn>
+      <v-btn @click="store.loggedIn = false; store.user = {}">Test Logout</v-btn> -->
+      <div v-if="!store.loggedIn">
         <Signup/>
       </div>
-      <div>
+      <div v-if="!store.loggedIn">
         <Login/>
       </div>
       <div v-else>
