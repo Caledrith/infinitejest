@@ -1,6 +1,6 @@
 <template>
     <v-container class="fill-height ma-0 pa-0">
-        <v-navigation-drawer permanent>
+        <v-navigation-drawer permanent fixed clipped class="sidenav">
             <v-list-item>
                 <v-list-item-content>
                 <v-list-item-title class="title">
@@ -51,3 +51,8 @@ export default {
   }
 };
 </script>
+<style>
+.sidenav {
+  padding-top: 65px;
+}
+</style>
