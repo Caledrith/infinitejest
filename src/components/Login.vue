@@ -10,14 +10,14 @@
           <v-container wrap>
             <v-col>
               <v-text-field
-                v-model="user.userName"
+                v-model="userName"
                 label="Username"
                 required
               ></v-text-field>
             </v-col>
             <v-col>
               <v-text-field
-                v-model="user.password"
+                v-model="password"
                 label="Password"
                 required
               ></v-text-field>
@@ -34,19 +34,30 @@
 </template>
 <script>
 import axios from 'axios'
+import { dataStore } from '../dataStore'
 
 export default {
   // @click signup function -> send data to the database
   data: () => ({
-    user: {
-      userName: "",
-      password: ""
-    },
+    userName: "",
+    password: "",
   }),
   methods: {
-    login(user)
+    login()
     {
-      axios.post('/users/authenticateUser', user)
+      axios.get('/users/authenticateUser', {
+        params:{
+          username: this.userName,
+          password: this.password
+        }
+      })
+        .then((response) => {
+          if(typeof response.data.message !== 'undefined' || response.data.message !== 'fail'){
+            dataStore.user = response.data.message
+            dataStore.loggedIn = true
+          }
+        })
+      
     }
   },
 }

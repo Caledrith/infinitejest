@@ -53,8 +53,8 @@ export default {
     jokeSource: "",
     jokeSourceURL: "",
     flags: null,
-    userId: dataStore.testUser.id,
-    username: dataStore.testUser.name
+    userId: dataStore.user.id,
+    username: dataStore.user.name
   }),
   created()
   {
