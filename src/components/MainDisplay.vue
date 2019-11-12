@@ -9,7 +9,8 @@
             <v-card
               outlined
             >
-              <v-list-item-title @click="toJoke(joke.id)" style="cursor: pointer" class="ma-2 title" v-text="joke.joke"></v-list-item-title>
+              <!--<v-list-item-title @click="toJoke(joke.id)" style="cursor: pointer" class="ma-2 title" v-text="joke.joke"></v-list-item-title> -->
+              <div @click="toJoke(joke.id)" class="jokeText">{{joke.joke}}</div>
               <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
               <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
@@ -20,6 +21,7 @@
                 </v-col>
                 <v-spacer/>
                 <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
+                <div v-else-if="joke.sourceURL" @click="toJokeSource(joke)" style="cursor: pointer">Source:  {{shortenURL(joke.sourceURL)}}</div>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
@@ -49,6 +51,10 @@ export default {
     }
   },
   methods: {
+    shortenURL(sourceURL){
+      var url = new URL(sourceURL)
+      return url.hostname
+    },
     toggleShow(joke) {
       joke.showPunch = !joke.showPunch
     },
@@ -90,3 +96,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.jokeText{
+  margin:5px;
+  font-weight: bold;
+  cursor:pointer;
+}
+</style>
