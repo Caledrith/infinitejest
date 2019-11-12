@@ -34,12 +34,13 @@
 import {testCategories} from '../categories.js'
 export default {
   data: () => ({
-    categories: [],
+    categories: [{categoryName: 'All', id: 0}],
   }),
   mounted ()  {
     axios
       .get('http://localhost:8000/categories/getAllCategories/')
-      .then(response => (this.categories = response.data.message))
+      .then(response => (this.categories.concat(response.data.message)))
+
   },
   created() {
     this.categories = testCategories

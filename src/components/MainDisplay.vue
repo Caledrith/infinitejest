@@ -13,8 +13,11 @@
               <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
               <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
-                <v-btn text>Like ({{joke.upvotes}})</v-btn>
-                <v-btn text>Dislike ({{joke.downvotes}})</v-btn>
+                <v-col>
+                  <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
+                  <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+                  <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
+                </v-col>
                 <v-spacer/>
                 <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
               </v-card-actions>
