@@ -5,17 +5,13 @@
         <span class="font-weight-light">JEST</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- <v-btn @click="store.loggedIn = true; store.user = store.testUser">Test Login</v-btn>
-      <v-btn @click="store.loggedIn = false; store.user = {}">Test Logout</v-btn> -->
-      <div v-if="!store.loggedIn">
-        <Signup/>
-      </div>
-      <div v-if="!store.loggedIn">
-        <Login/>
-      </div>
-      <div v-else>
+      <v-toolbar-items v-if="!store.loggedIn">
+        <Signup class="pa-2 mx-1 mt-1"/>
+        <Login class="pa-2 mx-1 mt-1"/>
+      </v-toolbar-items>
+      <v-toolbar-items v-else>
         <v-btn to="/submitJoke">Submit a Joke</v-btn>
-      </div>
+      </v-toolbar-items>
     </v-app-bar>
 </template>
 <script>
