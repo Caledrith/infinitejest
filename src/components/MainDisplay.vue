@@ -8,11 +8,12 @@
           <v-list-item-content>
             <v-card
               outlined
+              @click="toJoke(joke.id)"
             >
               <!--<v-list-item-title @click="toJoke(joke.id)" style="cursor: pointer" class="ma-2 title" v-text="joke.joke"></v-list-item-title> -->
-              <div @click="toJoke(joke.id)" class="jokeText">{{joke.joke}}</div>
-              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
-              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
+              <div class="jokeText">{{joke.joke}}</div>
+              <v-btn v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">Click to reveal punchline</v-btn>
+              <v-list-item-subtitle class="subtitle-1 pl-3" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-col>
                   <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
