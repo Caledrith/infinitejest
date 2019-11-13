@@ -16,13 +16,13 @@
               <v-list-item-subtitle class="subtitle-1 pl-3" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-col>
-                  <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
-                  <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+                  <v-btn text icon v-on:click.stop v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
+                  <v-btn text icon v-on:click.stop v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
                   <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
                 </v-col>
                 <v-spacer/>
-                <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
-                <div v-else-if="joke.sourceURL" @click="toJokeSource(joke)" style="cursor: pointer">Source:  {{shortenURL(joke.sourceURL)}}</div>
+                <div v-if="joke.source" v-on:click.stop @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
+                <div v-else-if="joke.sourceURL" v-on:click.stop @click="toJokeSource(joke)" style="cursor: pointer">Source:  {{shortenURL(joke.sourceURL)}}</div>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
