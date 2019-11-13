@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <v-list>
+      <v-list color="#FBFBFB">
         <v-list-item
           v-for="(joke) in displayJokes"
           :key="joke.id"
