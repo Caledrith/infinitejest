@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <v-list color="#FBFBFB">
+      <v-list color="#FAFAFA">
         <v-list-item
           v-for="(joke) in displayJokes"
           :key="joke.id"
@@ -10,7 +10,6 @@
               outlined
               @click="toJoke(joke.id)"
             >
-              <!--<v-list-item-title @click="toJoke(joke.id)" style="cursor: pointer" class="ma-2 title" v-text="joke.joke"></v-list-item-title> -->
               <div class="jokeText">{{joke.joke}}</div>
               <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">Click to reveal punchline</v-btn>
               <v-list-item-subtitle class="subtitle-1 pl-3" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
