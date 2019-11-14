@@ -1,5 +1,6 @@
 <template>
   <div class="Submit Joke">
+    <v-card outlined class="ma-4">
     <h1 class="ma-2 px-2">Submit a joke</h1>
     <h4 class="mx-2 px-2">Make sure to read the rules before submitting</h4>
     <v-form id="form">
@@ -33,6 +34,7 @@
         </v-col>
       </v-container>
     </v-form>
+    </v-card>
   </div>
 </template>
 

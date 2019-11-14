@@ -27,22 +27,16 @@
               <br>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col>
-            <v-rating v-model="rating" :value="rating" readonly half-increments></v-rating>
-            </v-col>
-          </v-row>
-          <v-card-actions>
-            <v-row>
-              <v-col>
+          <v-card-actions class="mx-5">
                 <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{upvotes}}
                 <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{downvotes}}
                 <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
-              </v-col>
-            </v-row>
-            <p v-if="joke.source">{{joke.source}}</p>
-            <a v-if="joke.sourceURL" v-bind:href="joke.sourceURL">{{shortenedURL}}</a>
+                <v-spacer/>
+                <div v-if="joke.source || joke.sourceURL" class="mr-1">Source:</div>
+                <a v-if="joke.source" v-bind:href="joke.sourceURL">{{joke.source}}</a>
+                <a v-if="joke.sourceURL" v-bind:href="joke.sourceURL">{{shortenedURL}}</a>
           </v-card-actions>
+
         </v-col>
       </v-row>
     </v-card>
