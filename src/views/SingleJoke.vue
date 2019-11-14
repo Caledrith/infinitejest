@@ -71,7 +71,7 @@ export default {
     if (typeof this.id === 'string') {
       this.id = parseInt(this.id);
     }
-    // will have to get this from the current user
+    // this.userId = this.dataStore.user.id
     this.userId = 1
   }, 
   methods: {
