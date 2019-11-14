@@ -16,9 +16,10 @@
           </v-row>
           <v-row>
             <v-col>
-              <p class="headline" v-on:click="seen = !seen" v-if="seen && hasPunchline">{{joke.hiddenPunchline}}</p>
-              <div v-if="!seen && hasPunchline">
-                <v-btn v-on:click="seen = !seen">Answer!</v-btn>
+              <p class="headline" v-on:click="seen = !seen" v-if="seen && joke.hiddenPunchline">{{joke.hiddenPunchline}}</p>
+              <div v-if="!seen && joke.hiddenPunchline">
+                <v-btn v-if="joke.jokeCategoryId == 3 || joke.jokeCategoryId == 4" v-on:click="seen = !seen">Answer</v-btn>
+                <v-btn v-else v-on:click="seen = !seen">Punchline</v-btn>
               </div>
             </v-col>
           </v-row>
@@ -32,15 +33,17 @@
             <v-rating v-model="rating" :value="rating" readonly half-increments></v-rating>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col>
-              <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{upvotes}}
-              <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{downvotes}}
-              <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
-            </v-col>
-          </v-row>
-          <p v-if="joke.source">{{joke.source}}</p>
-          <a v-if="joke.sourceURL" v-bind:href="joke.sourceURL">{{shortenedURL}}</a>
+          <v-card-actions>
+            <v-row>
+              <v-col>
+                <v-btn text icon v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{upvotes}}
+                <v-btn text icon v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{downvotes}}
+                <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
+              </v-col>
+            </v-row>
+            <p v-if="joke.source">{{joke.source}}</p>
+            <a v-if="joke.sourceURL" v-bind:href="joke.sourceURL">{{shortenedURL}}</a>
+          </v-card-actions>
         </v-col>
       </v-row>
     </v-card>
@@ -141,12 +144,6 @@ export default {
     }
   },
   computed: {
-    hasPunchline: function() {
-      if (this.joke !== null && this.joke.hasPunchline !== '') {
-        return true
-      }
-      return false
-    },
     loaded: function() {
       if (this.joke == null) {
         return false
