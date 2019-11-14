@@ -18,7 +18,7 @@
             <v-col>
               <p class="headline grey--text text--darken-2" v-on:click="seen = !seen" v-if="seen && joke.hiddenPunchline">{{joke.hiddenPunchline}}</p>
               <div v-if="!seen && joke.hiddenPunchline">
-                <v-btn v-on:click="seen = !seen">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
+                <v-btn v-on:click="seen = !seen">{{getPunchlineText(joke.isRiddle)}}</v-btn>
               </div>
             </v-col>
           </v-row>
@@ -60,6 +60,7 @@ export default {
     upvotes: 0,
     downvotes: 0,
     shortenedURL: null,
+    isRiddle: 0,
   }),
   created () {
     this.id = this.$route.params.id;
@@ -70,17 +71,13 @@ export default {
     this.userId = 1
   }, 
   methods: {
-    getPunchlineText(jokeCategoryId)
+    getPunchlineText(isRiddle)
     {
-      if(jokeCategoryId == 1 || jokeCategoryId == 2)
-      {
-        return "Punchline"
-      }
-      if(jokeCategoryId == 3 || jokeCategoryId == 4)
+      if(isRiddle == 1)
       {
         return "Answer"
       }
-      return ""
+      return "Punchline"
     },
     upvote: function () {
       var previousVote = false
@@ -165,6 +162,7 @@ export default {
        this.jokeRating = response.data.message.rating,
        this.upvotes = response.data.message.upvotes,
        this.downvotes = response.data.message.downvotes,
+       this.isRiddle = response.data.message.isRiddle,
        this.shortenURL()))
     axios.get('/ratings/getRatingByUserAndJoke',{
       params:{

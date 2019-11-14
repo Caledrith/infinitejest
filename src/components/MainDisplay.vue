@@ -11,7 +11,7 @@
               @click="toJoke(joke.id)"
             >
               <div class="jokeText ma-2 pa-2 font-weight-medium">{{joke.joke}}</div>
-              <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
+              <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.isRiddle)}}</v-btn>
               <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-col>
@@ -52,17 +52,13 @@ export default {
     }
   },
   methods: {
-    getPunchlineText(jokeCategoryId)
+    getPunchlineText(isRiddle)
     {
-      if(jokeCategoryId == 1 || jokeCategoryId == 2)
-      {
-        return "Punchline"
-      }
-      if(jokeCategoryId == 3 || jokeCategoryId == 4)
+      if(isRiddle == 1)
       {
         return "Answer"
       }
-      return ""
+      return "Punchline"
     },
     shortenURL(sourceURL){
       var url = new URL(sourceURL)
