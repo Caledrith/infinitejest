@@ -1,6 +1,7 @@
 <template>
   <div class="Submit Joke">
-    <h1>This is a Joke submission page</h1>
+    <h1 class="ma-2 px-2">Submit a joke</h1>
+    <h4 class="mx-2 px-2">Make sure to read the rules before submitting</h4>
     <v-form id="form">
       <v-container>
         <v-col>
@@ -53,8 +54,8 @@ export default {
     jokeSource: "",
     jokeSourceURL: "",
     flags: null,
-    userId: dataStore.testUser.id,
-    username: dataStore.testUser.name
+    userId: dataStore.user.id,
+    username: dataStore.user.name
   }),
   created()
   {
