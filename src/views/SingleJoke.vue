@@ -18,8 +18,7 @@
             <v-col>
               <p class="headline" v-on:click="seen = !seen" v-if="seen && joke.hiddenPunchline">{{joke.hiddenPunchline}}</p>
               <div v-if="!seen && joke.hiddenPunchline">
-                <v-btn v-if="joke.jokeCategoryId == 3 || joke.jokeCategoryId == 4" v-on:click="seen = !seen">Answer</v-btn>
-                <v-btn v-else v-on:click="seen = !seen">Punchline</v-btn>
+                <v-btn v-on:click="seen = !seen">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
               </div>
             </v-col>
           </v-row>
@@ -76,6 +75,18 @@ export default {
     this.userId = 1
   }, 
   methods: {
+    getPunchlineText(jokeCategoryId)
+    {
+      if(jokeCategoryId == 1 || jokeCategoryId == 2)
+      {
+        return "Punchline"
+      }
+      if(jokeCategoryId == 3 || jokeCategoryId == 4)
+      {
+        return "Answer"
+      }
+      return ""
+    },
     upvote: function () {
       var previousVote = false
       var change = 0

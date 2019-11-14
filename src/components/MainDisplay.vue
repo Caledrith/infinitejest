@@ -51,6 +51,18 @@ export default {
     }
   },
   methods: {
+    getPunchlineText(jokeCategoryId)
+    {
+      if(jokeCategoryId == 1 || jokeCategoryId == 2)
+      {
+        return "Punchline"
+      }
+      if(jokeCategoryId == 3 || jokeCategoryId == 4)
+      {
+        return "Answer"
+      }
+      return ""
+    },
     shortenURL(sourceURL){
       var url = new URL(sourceURL)
       return url.hostname
