@@ -52,6 +52,7 @@
 
 <script>
 // @ is an alias to /src
+import {dataStore} from '../dataStore.js'
 import router from '../router'
 import axios from 'axios'
 

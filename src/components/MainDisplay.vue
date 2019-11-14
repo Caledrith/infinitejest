@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {testJokes} from '../testJokes.js'
+import {dataStore} from '../dataStore.js'
 import axios from 'axios'
 export default {
   props:
