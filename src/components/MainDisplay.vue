@@ -20,8 +20,8 @@
                   <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
                 </v-col>
                 <v-spacer/>
-                <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
-                <div v-else-if="joke.sourceURL" @click="toJokeSource(joke)" style="cursor: pointer">Source:  {{shortenURL(joke.sourceURL)}}</div>
+                <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer">Source: {{joke.source}}</div>
+                <a v-else-if="joke.sourceURL" v-bind:href="joke.sourceURL" style="cursor: pointer">Source: {{shortenURL(joke.sourceURL)}}</a>
               </v-card-actions>
             </v-card>
           </v-list-item-content>

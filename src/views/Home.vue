@@ -6,8 +6,8 @@
           <SideNav @choosecategory="sendCategory($event)"/>
         </v-col>
         <v-col 
-          :lg="10"
-          :md="9"
+          :lg="9"
+          :md="8"
           :sm="7"
           :xs="5"
           class="mt-0 pt-0">
