@@ -6,7 +6,7 @@
         <v-col style="text-align:center">
           <v-row>
             <v-col>
-              <p class="display-1" v-if="loaded">{{joke.joke}}</p>
+              <p class="display-1 font-weight-med" v-if="loaded">{{joke.joke}}</p>
             </v-col>
           </v-row>
           <v-row>
@@ -16,7 +16,7 @@
           </v-row>
           <v-row>
             <v-col>
-              <p class="headline" v-on:click="seen = !seen" v-if="seen && joke.hiddenPunchline">{{joke.hiddenPunchline}}</p>
+              <p class="headline grey--text text--darken-2" v-on:click="seen = !seen" v-if="seen && joke.hiddenPunchline">{{joke.hiddenPunchline}}</p>
               <div v-if="!seen && joke.hiddenPunchline">
                 <v-btn v-on:click="seen = !seen">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
               </div>
