@@ -11,13 +11,13 @@
               @click="toJoke(joke.id)"
             >
               <div class="jokeText ma-2 pa-2">{{joke.joke}}</div>
-              <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">Click to reveal punchline</v-btn>
+              <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
               <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
                 <v-col>
                   <v-btn text icon v-on:click.stop v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
                   <v-btn text icon v-on:click.stop v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
-                  <!-- <v-btn v-if="user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
+                  <!-- <v-btn v-if="dataStore.user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
                 </v-col>
                 <v-spacer/>
                 <div v-if="joke.source" v-on:click.stop @click="toJokeSource(joke)" style="cursor: pointer">Source: {{joke.source}}</div>
