@@ -45,7 +45,6 @@ import {dataStore} from '../dataStore.js'
 
 export default {
   name: 'joke',
-  // userId should be replaced by dataStore.user.id when logging is implemented
   data: () => ({
     categories: [],
     jokeTitle: "",
