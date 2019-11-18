@@ -32,18 +32,18 @@
 
 <script>
 import {testCategories} from '../categories.js'
+import axios from 'axios'
 export default {
   data: () => ({
-    categories: [{categoryName: 'All', id: 0}],
+    categories: [],
   }),
   mounted ()  {
     axios
-      .get('http://localhost:8000/categories/getAllCategories/')
-      .then(response => (this.categories.concat(response.data.message)))
-
-  },
-  created() {
-    this.categories = testCategories
+      .get('/categories/getAllCategories/')
+      .then(response => {
+        this.categories = response.data.message
+        this.categories.unshift({categoryName: 'All', id: 0})
+        })
   },
   methods: {
     chooseCategory(id) {
