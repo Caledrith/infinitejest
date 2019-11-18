@@ -46,7 +46,7 @@ export default {
   methods: {
     login(user)
     {
-      axios.post('/users/authenticateUser', user)
+      axios.post('/users/authenticateUser/', user)
     }
   },
 }

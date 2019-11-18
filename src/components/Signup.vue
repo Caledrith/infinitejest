@@ -60,7 +60,7 @@ export default {
   }),
   methods: {
     signup: function() {
-      axios.post('/users/createUser', this.user)
+      axios.post('/users/createUser/', this.user)
     }
   },
   mounted() {
