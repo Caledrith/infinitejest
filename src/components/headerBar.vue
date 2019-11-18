@@ -10,7 +10,7 @@
         <Login class="pa-2 mx-1 mt-1"/>
       </v-toolbar-items>
       <v-toolbar-items v-else>
-        <v-btn to="/submitJoke">Submit a Joke</v-btn>
+        <v-btn text to="/submitJoke">Submit a Joke</v-btn>
       </v-toolbar-items>
     </v-app-bar>
 </template>
