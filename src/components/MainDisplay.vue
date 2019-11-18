@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <v-list>
+      <v-list color="#FAFAFA">
         <v-list-item
           v-for="(joke) in displayJokes"
           :key="joke.id"
@@ -8,15 +8,21 @@
           <v-list-item-content>
             <v-card
               outlined
+              @click="toJoke(joke.id)"
             >
-              <v-list-item-title @click="toJoke(joke.id)" style="cursor: pointer" class="ma-2 title" v-text="joke.joke"></v-list-item-title>
-              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="!joke.showPunch">Click to reveal punchline</v-list-item-subtitle>
-              <v-list-item-subtitle @click="toggleShow(joke)" class="subtitle-1" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
+              <div class="jokeText ma-2 pa-2 font-weight-medium">{{joke.joke}}</div>
+              <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
+              <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
               <v-card-actions>
-                <v-btn text>Like ({{joke.upvotes}})</v-btn>
-                <v-btn text>Dislike ({{joke.downvotes}})</v-btn>
+                <v-col>
+                  <v-btn text icon v-on:click.stop v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
+                  <v-btn text icon v-on:click.stop v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+                  <!-- <v-btn v-if="dataStore.user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
+                </v-col>
                 <v-spacer/>
-                <div v-if="joke.source" @click="toJokeSource(joke)" style="cursor: pointer"> Source: {{joke.source}}</div>
+                <div v-if="joke.source || joke.sourceURL" class="mr-1">Source:</div>
+                <a v-if="joke.source" v-on:click.stop v-bind:href="joke.sourceURL" style="cursor: pointer">{{joke.source}}</a>
+                <a v-else-if="joke.sourceURL" v-on:click.stop v-bind:href="joke.sourceURL" style="cursor: pointer">{{shortenURL(joke.sourceURL)}}</a>
               </v-card-actions>
             </v-card>
           </v-list-item-content>
@@ -26,7 +32,7 @@
 </template>
 
 <script>
-import {testJokes} from '../testJokes.js'
+import {dataStore} from '../dataStore.js'
 import axios from 'axios'
 export default {
   props:
@@ -46,6 +52,22 @@ export default {
     }
   },
   methods: {
+    getPunchlineText(jokeCategoryId)
+    {
+      if(jokeCategoryId == 1 || jokeCategoryId == 2)
+      {
+        return "Punchline"
+      }
+      if(jokeCategoryId == 3 || jokeCategoryId == 4)
+      {
+        return "Answer"
+      }
+      return ""
+    },
+    shortenURL(sourceURL){
+      var url = new URL(sourceURL)
+      return url.hostname
+    },
     toggleShow(joke) {
       joke.showPunch = !joke.showPunch
     },
@@ -87,3 +109,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.jokeText{
+  margin:5px;
+  cursor:pointer;
+}
+</style>

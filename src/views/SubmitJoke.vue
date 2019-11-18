@@ -1,6 +1,8 @@
 <template>
   <div class="Submit Joke">
-    <h1>This is a Joke submission page</h1>
+    <v-card outlined class="ma-4">
+    <h1 class="ma-2 px-2">Submit a joke</h1>
+    <h4 class="mx-2 px-2">Make sure to read the rules before submitting</h4>
     <v-form id="form">
       <v-container>
         <v-col>
@@ -32,6 +34,7 @@
         </v-col>
       </v-container>
     </v-form>
+    </v-card>
   </div>
 </template>
 
@@ -42,7 +45,6 @@ import {dataStore} from '../dataStore.js'
 
 export default {
   name: 'joke',
-  // userId should be replaced by dataStore.user.id when logging is implemented
   data: () => ({
     categories: [],
     jokeTitle: "",
@@ -53,8 +55,8 @@ export default {
     jokeSource: "",
     jokeSourceURL: "",
     flags: null,
-    userId: dataStore.testUser.id,
-    username: dataStore.testUser.name
+    userId: dataStore.user.id,
+    username: dataStore.user.name
   }),
   created()
   {

@@ -2,10 +2,15 @@
   <div class="home">
     <v-container fluid class="fill-height pa-0 ma-0">
       <v-row class="pa-0 ma-0">
-        <v-col cols="2" class="pa-0 ma-0">
+        <v-col class="pa-0 ma-0">
           <SideNav @choosecategory="sendCategory($event)"/>
         </v-col>
-        <v-col cols="10" class="mt-0 pt-0">
+        <v-col 
+          :lg="9"
+          :md="8"
+          :sm="7"
+          :xs="5"
+          class="mt-0 pt-0">
           <MainDisplay v-bind:category="category"/>
         </v-col>
       </v-row>
