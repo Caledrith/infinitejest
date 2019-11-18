@@ -9,7 +9,7 @@
           <v-textarea
             name="Joke"
             outlined
-            label="Joke"
+            label="Joke (requred)"
             v-model="jokeTitle"
           ></v-textarea>
           <v-text-field
@@ -20,16 +20,22 @@
             :items="categories"
             item-text="categoryName"
             item-value="id"
-            label="Category"
+            label="Category (required)"
+            v-model="jokeCategoryId"
           ></v-select>
           <v-text-field
-            label="Joke Source"
+            label="Joke Source (optional)"
             v-model="jokeSource"
           ></v-text-field>
           <v-text-field
-            label="Joke Source URL"
+            label="Joke Source URL (optional)"
             v-model="jokeSourceURL"
           ></v-text-field>
+          <p v-if="formErrors.length"> Please correct the following errors:
+            <ul>
+              <li v-for="formError in formErrors" :key=formError style="color:red">{{ formError }}</li>
+            </ul>
+          </p>
           <v-btn @click="submit" outlined color="indigo">Submit</v-btn>
         </v-col>
       </v-container>
@@ -50,13 +56,14 @@ export default {
     jokeTitle: "",
     jokePunchline: "",
     jokeCategory: "",
-    jokeCategoryId: 0,
+    jokeCategoryId: -1,
     rating: 0.5,
     jokeSource: "",
     jokeSourceURL: "",
     flags: null,
     userId: dataStore.user.id,
-    username: dataStore.user.name
+    username: dataStore.user.name,
+    formErrors: []
   }),
   created()
   {
@@ -80,10 +87,33 @@ export default {
         showPunch: false,
         username: this.username
       }
-      axios
+
+      if (this.validateForm()) {
+        axios
         .post('/jokes/createJoke/', joke)
         .then(response => (this.$router.push('/')))
+      } else {
+        // don't submit
+      }
+    },
+    validateForm() {
+      this.formErrors = []
 
+      // category required
+      if (this.jokeCategoryId == -1) {
+        this.formErrors.push("Joke Category Required")
+      }
+
+      // joke required
+      if (this.jokeTitle == "") {
+        this.formErrors.push("Joke Text Required")
+      }
+
+      if (this.formErrors.length == 0) {
+        return true
+      } else {
+        return false
+      }
     },
     getTime() {
       var today = new Date();
