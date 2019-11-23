@@ -17,10 +17,19 @@
             </v-col>
             <v-col>
               <v-text-field
-                v-model="password"
+                :type="'password'"
+                v-model="userpassword"
                 label="Password"
                 required
+                
               ></v-text-field>
+            </v-col>
+            <v-col>
+              <p v-if="formErrors.length"> Please correct the following errors:
+                <ul>
+                  <li v-for="formError in formErrors" :key=formError style="color:red">{{ formError }}</li>
+                </ul>
+              </p>
             </v-col>
           </v-container>
         </v-form>
@@ -40,15 +49,28 @@ export default {
   // @click signup function -> send data to the database
   data: () => ({
     userName: "",
-    password: "",
+    userpassword: "",
+    formErrors: []
   }),
   methods: {
+    validateForm() {
+      this.formErrors = []
+      if (this.userName == "")
+        this.formErrors.push("Username Required")
+      if (this.userpassword == "")
+        this.formErrors.push("Password Required")
+      if (this.formErrors.length == 0) {
+        return true
+      }
+      return false
+    },
     login()
     {
+      if(this.validateForm()) {
       axios.get('/users/authenticateUser/', {
         params:{
           username: this.userName,
-          password: this.password
+          password: this.userpassword
         }
       })
         .then((response) => {
@@ -56,8 +78,10 @@ export default {
             dataStore.user = response.data.message
             dataStore.loggedIn = true
           }
+        }).catch((response) => {
+          this.formErrors.push("User and Password not valid")
         })
-      
+      }
     }
   },
 }
