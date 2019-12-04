@@ -1,12 +1,12 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="400">
+    <v-dialog max-width="400">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Login</v-btn>
       </template>
       <v-card>
         <v-card-title class="headline">Login</v-card-title>
-          <v-form v-model="valid">
+          <v-form>
           <v-container wrap>
             <v-col>
               <v-text-field

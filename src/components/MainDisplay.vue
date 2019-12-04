@@ -1,33 +1,47 @@
 <template>
   <v-container>
-      <v-list color="#FAFAFA">
-        <v-list-item
-          v-for="(joke) in displayJokes"
-          :key="joke.id"
-        >
-          <v-list-item-content>
-            <v-card
-              outlined
-              @click="toJoke(joke.id)"
-            >
-              <div class="jokeText ma-2 pa-2 font-weight-medium">{{joke.joke}}</div>
-              <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
-              <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
-              <v-card-actions>
-                <v-col>
-                  <v-btn text icon v-on:click.stop v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
-                  <v-btn text icon v-on:click.stop v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
-                  <!-- <v-btn v-if="dataStore.user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
-                </v-col>
-                <v-spacer/>
-                <div v-if="joke.source || joke.sourceURL" class="mr-1">Source:</div>
-                <a v-if="joke.source" v-on:click.stop v-bind:href="joke.sourceURL" style="cursor: pointer">{{joke.source}}</a>
-                <a v-else-if="joke.sourceURL" v-on:click.stop v-bind:href="joke.sourceURL" style="cursor: pointer">{{shortenURL(joke.sourceURL)}}</a>
-              </v-card-actions>
-            </v-card>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+
+    <v-toolbar>
+      <v-toolbar-items>
+        <v-select
+          :items="sortingOptions"
+          label="Sorting"
+          flat
+          class="mt-2 pt-2"
+          v-model="sortSelection"
+          v-on:change="sort()"
+        ></v-select>
+      </v-toolbar-items>
+    </v-toolbar>
+
+    <v-list color="#FAFAFA">
+      <v-list-item
+        v-for="(joke) in displayJokes"
+        :key="joke.id"
+      >
+        <v-list-item-content>
+          <v-card
+            outlined
+            @click="toJoke(joke.id)"
+          >
+            <div class="jokeText ma-2 pa-2 font-weight-medium">{{joke.joke}}</div>
+            <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
+            <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
+            <v-card-actions>
+              <v-col>
+                <v-btn text icon v-on:click.stop v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
+                <v-btn text icon v-on:click.stop v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+                <!-- <v-btn v-if="dataStore.user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
+              </v-col>
+              <v-spacer/>
+              <div v-if="joke.source || joke.sourceURL" class="mr-1">Source:</div>
+              <a v-if="joke.source" v-on:click.stop v-bind:href="joke.sourceURL" style="cursor: pointer">{{joke.source}}</a>
+              <a v-else-if="joke.sourceURL" v-on:click.stop v-bind:href="joke.sourceURL" style="cursor: pointer">{{shortenURL(joke.sourceURL)}}</a>
+            </v-card-actions>
+          </v-card>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </v-container>
 </template>
 
@@ -41,6 +55,8 @@ export default {
     jokes: [],
     displayJokes: [],
     isHovering: false,
+    sortingOptions: ["New", "Relevance"],
+    sortSelection: "New"
   }),
   watch: {
     category: {
@@ -96,6 +112,10 @@ export default {
         }
       }
       this.displayJokes = intermediateJokes;
+    },
+    sort(){
+      //placeholder for sorting
+      this.sortSelection
     }
 
   },
