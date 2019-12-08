@@ -29,8 +29,8 @@
             <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
             <v-card-actions>
               <v-col>
-                <v-btn text icon v-on:click.stop v-on:click="upvote"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
-                <v-btn text icon v-on:click.stop v-on:click="downvote"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
+                <v-btn text icon v-on:click.stop v-on:click="upvote(joke)"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
+                <v-btn text icon v-on:click.stop v-on:click="downvote(joke)"><v-icon>mdi-thumb-down</v-icon></v-btn> {{joke.downvotes}}
                 <!-- <v-btn v-if="dataStore.user" text icon v-on:click="edit"><v-icon>mdi-pencil</v-icon></v-btn> -->
               </v-col>
               <v-spacer/>
@@ -68,6 +68,20 @@ export default {
     }
   },
   methods: {
+    upvote(joke) {
+      joke.upvotes = joke.upvotes + 1
+      axios
+        .patch('/jokes/upvoteJoke/'+joke.id)
+        .catch((error) => {
+      })
+    },
+    downvote(joke) {
+      joke.downvotes = joke.downvotes + 1
+      axios
+        .patch('/jokes/downvoteJoke/'+joke.id)
+        .catch((error) => {
+      })
+    },
     getPunchlineText(jokeCategoryId)
     {
       if(jokeCategoryId == 1 || jokeCategoryId == 2)
