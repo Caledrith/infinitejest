@@ -136,10 +136,10 @@ export default {
     sort(){
       //placeholder for sorting
       if (this.sortSelection == "Relevance"){
-        this.displayJokes.sort((a, b) => (a.relevance > b.relevance) ? 1 : -1)
+        this.displayJokes.sort((a, b) => (a.relevance > b.relevance) ? -1 : 1)
       }
       if (this.sortSelection == "New"){
-        this.displayJokes.sort((a, b) => (a.uploaded > b.uploaded) ? 1 : -1)
+        this.displayJokes.sort((a, b) => (a.uploaded > b.uploaded) ? -1 : 1)
       }
     }
 
