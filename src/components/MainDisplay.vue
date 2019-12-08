@@ -69,6 +69,9 @@ export default {
   },
   methods: {
     upvote(joke) {
+      if (dataStore.loggedIn == false){
+        return
+      }
       joke.upvotes = joke.upvotes + 1
       axios
         .patch('/jokes/upvoteJoke/'+joke.id)
@@ -76,6 +79,9 @@ export default {
       })
     },
     downvote(joke) {
+      if (dataStore.loggedIn == false){
+        return
+      }
       joke.downvotes = joke.downvotes + 1
       axios
         .patch('/jokes/downvoteJoke/'+joke.id)
