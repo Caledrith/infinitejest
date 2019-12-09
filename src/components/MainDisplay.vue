@@ -25,8 +25,8 @@
             @click="toJoke(joke.id)"
           >
             <div class="jokeText ma-2 pa-2 font-weight-medium">{{joke.joke}}</div>
-            <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="!joke.showPunch && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
-            <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
+            <v-btn small v-on:click.stop @click="toggleShow(joke)" class="subtitle-1 ml-3" v-if="(!joke.showPunch || joke.showPunch == 0) && joke.hiddenPunchline">{{getPunchlineText(joke.jokeCategoryId)}}</v-btn>
+            <v-list-item-subtitle class="subtitle-1 pl-2 ml-2" v-if="joke.showPunch == true" v-text="joke.hiddenPunchline"></v-list-item-subtitle>
             <v-card-actions>
               <v-col>
                 <v-btn text icon v-on:click.stop v-on:click="upvote(joke)"><v-icon>mdi-thumb-up</v-icon></v-btn> {{joke.upvotes}}
@@ -105,7 +105,7 @@ export default {
       return url.hostname
     },
     toggleShow(joke) {
-      joke.showPunch = !joke.showPunch
+      joke.showPunch = true
     },
     toJoke(jokeId)
     {
